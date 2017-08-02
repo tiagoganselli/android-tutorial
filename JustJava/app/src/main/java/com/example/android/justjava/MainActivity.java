@@ -1,12 +1,16 @@
 package com.example.android.justjava;
 
+import android.content.Intent;
 import android.icu.text.NumberFormat;
 import android.icu.util.Currency;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int numberOfCoffees = 2;
     private boolean hasCream = false;
+    private boolean hasChocolate = false;
 
     /*********************************************************************************************
      * Main methods
@@ -44,7 +49,27 @@ public class MainActivity extends AppCompatActivity {
      */
     public void submitOrder(View view) {
         Log.v("MainActivity", "Submitting order...");
-        displayMessage(createOrderSummary(calculatePrice()));
+
+        EditText name = (EditText) findViewById(R.id.name_view);
+
+        if (TextUtils.isEmpty(name.getText())) {
+            name.setError("Name required!");
+            return;
+        }
+
+        //displayMessage(createOrderSummary(calculatePrice()));
+        composeEmail("Just Java order for " + name.getText(),
+                createOrderSummary(calculatePrice()));
+    }
+
+    public void composeEmail(String subject, String text) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     /**
@@ -76,9 +101,11 @@ public class MainActivity extends AppCompatActivity {
      *********************************************************************************************/
 
     public void increment(View view) {
-        numberOfCoffees++;
-        displayQuantity(numberOfCoffees);
-        displayPrice();
+        if (numberOfCoffees < 100) {
+            numberOfCoffees++;
+            displayQuantity(numberOfCoffees);
+            displayPrice();
+        }
     }
 
     public void decrement(View view) {
@@ -102,13 +129,28 @@ public class MainActivity extends AppCompatActivity {
                     hasCream = false;
                 }
                 break;
+            case R.id.checkboxChocolate:
+                if (checked) {
+                    hasChocolate = true;
+                }
+                else {
+                    hasChocolate = false;
+                }
+                break;
             default:
                 break;
         }
     }
 
     private int calculatePrice() {
-        return numberOfCoffees * 5;
+        int basePrice = 5;
+        if (hasCream) {
+            basePrice += 1;
+        }
+        if (hasChocolate) {
+            basePrice += 2;
+        }
+        return numberOfCoffees * basePrice;
     }
 
     /**
@@ -118,8 +160,9 @@ public class MainActivity extends AppCompatActivity {
      * @return String to be displayed.
      */
     private String createOrderSummary(int price) {
-        String priceMessage = "Name: Tiago";
-        priceMessage += "\nAdded Whipped cream? " + (hasCream?"true":"false");
+        String priceMessage = "Name: " + ((EditText) findViewById(R.id.name_view)).getText();
+        priceMessage += "\nAdd Whipped cream? " + (hasCream?"Yes":"No");
+        priceMessage += "\nAdd Chocolate? " + (hasChocolate?"Yes":"No");
         priceMessage += "\nQuantity: " + numberOfCoffees;
         priceMessage += "\nTotal: " + NumberFormat.getCurrencyInstance().format(price);
         priceMessage += "\nThank You!";
