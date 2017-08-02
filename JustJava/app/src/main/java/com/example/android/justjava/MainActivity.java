@@ -4,7 +4,9 @@ import android.icu.text.NumberFormat;
 import android.icu.util.Currency;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
      *********************************************************************************************/
 
     private int numberOfCoffees = 2;
+    private boolean hasCream = false;
 
     /*********************************************************************************************
      * Main methods
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        Log.v("MainActivity", "Submitting order...");
         displayMessage(createOrderSummary(calculatePrice()));
     }
 
@@ -85,6 +89,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.checkboxCream:
+                if (checked) {
+                    hasCream = true;
+                }
+                else {
+                    hasCream = false;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     private int calculatePrice() {
         return numberOfCoffees * 5;
     }
@@ -96,10 +118,11 @@ public class MainActivity extends AppCompatActivity {
      * @return String to be displayed.
      */
     private String createOrderSummary(int price) {
-        String priceMessage = "Name: Tiago" + "\n" +
-                "Quantity: " + numberOfCoffees + "\n" +
-                "Total: " + NumberFormat.getCurrencyInstance().format(price) + "\n" +
-                "Thank You!";
+        String priceMessage = "Name: Tiago";
+        priceMessage += "\nAdded Whipped cream? " + (hasCream?"true":"false");
+        priceMessage += "\nQuantity: " + numberOfCoffees;
+        priceMessage += "\nTotal: " + NumberFormat.getCurrencyInstance().format(price);
+        priceMessage += "\nThank You!";
 
         //Toast.makeText(this, "Order Summary created!", Toast.LENGTH_SHORT).show();
 
