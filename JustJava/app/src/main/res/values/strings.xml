@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Just Java</string>
+    <string name="name_required">Name required!</string>
+    <string name="mail_subject_prepend">Just Java order for </string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="order_name">Name: </string>
+    <string name="order_add_cream">Add Whipped cream? </string>
+    <string name="order_add_chocolate">Add Chocolate? </string>
+    <string name="order_quantity">Quantity: </string>
+    <string name="order_total">Total: </string>
+    <string name="order_thank_you">Thank You!</string>
+    <string name="activity_name">Name</string>
+    <string name="activity_toppings">TOPPINGS</string>
+    <string name="activity_quantity">QUANTITY</string>
+    <string name="activity_order_summary">Order Summary</string>
+    <string name="activity_checkbox_cream">Whipped cream</string>
+    <string name="activity_checkbox_chocolate">Chocolate</string>
+    <string name="activity_button_order">ORDER</string>
+    <string name="activity_minus_sign">-</string>
+    <string name="activity_plus_sign">+</string>
+
 </resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Just Java</string>
+    <string name="activity_button_order">Enviar Pedido</string>
+    <string name="activity_checkbox_chocolate">Chocolate</string>
+    <string name="activity_checkbox_cream">Creme</string>
+    <string name="activity_name">Nome</string>
+    <string name="activity_order_summary">Pedido</string>
+    <string name="activity_quantity">QUANTIDADE</string>
+    <string name="activity_toppings">ADICIONAIS</string>
+    <string name="mail_subject_prepend">"Pedido de "</string>
+    <string name="name_required">Campo necessário!</string>
+    <string name="no">Não</string>
+    <string name="order_add_chocolate">"Adicionar Chocolate? "</string>
+    <string name="order_add_cream">"Adicionar Creme? "</string>
+    <string name="order_name">"Nome: "</string>
+    <string name="order_quantity">"Quantidade: "</string>
+    <string name="order_thank_you">Obrigado!</string>
+    <string name="order_total">"Total: "</string>
+    <string name="yes">Sim</string>
+</resources>

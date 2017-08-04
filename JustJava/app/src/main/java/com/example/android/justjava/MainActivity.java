@@ -53,13 +53,17 @@ public class MainActivity extends AppCompatActivity {
         EditText name = (EditText) findViewById(R.id.name_view);
 
         if (TextUtils.isEmpty(name.getText())) {
-            name.setError("Name required!");
+            name.setError(getString(R.string.name_required));
             return;
         }
 
         //displayMessage(createOrderSummary(calculatePrice()));
-        composeEmail("Just Java order for " + name.getText(),
-                createOrderSummary(calculatePrice()));
+
+        composeEmail(getString(R.string.mail_subject_prepend) + name.getText(),
+                createOrderSummary(name.getText().toString(),
+                        (hasCream ? getString(R.string.yes) : getString(R.string.no)),
+                        (hasChocolate ? getString(R.string.yes) : getString(R.string.no)),
+                        calculatePrice()));
     }
 
     public void composeEmail(String subject, String text) {
@@ -159,13 +163,13 @@ public class MainActivity extends AppCompatActivity {
      * @param price Order total price.
      * @return String to be displayed.
      */
-    private String createOrderSummary(int price) {
-        String priceMessage = "Name: " + ((EditText) findViewById(R.id.name_view)).getText();
-        priceMessage += "\nAdd Whipped cream? " + (hasCream?"Yes":"No");
-        priceMessage += "\nAdd Chocolate? " + (hasChocolate?"Yes":"No");
-        priceMessage += "\nQuantity: " + numberOfCoffees;
-        priceMessage += "\nTotal: " + NumberFormat.getCurrencyInstance().format(price);
-        priceMessage += "\nThank You!";
+    private String createOrderSummary(String name, String addCream, String addChocolate, int price) {
+        String priceMessage = getString(R.string.order_name) + name;
+        priceMessage += "\n" + getString(R.string.order_add_cream) + addCream;
+        priceMessage += "\n" + getString(R.string.order_add_chocolate) + addChocolate;
+        priceMessage += "\n" + getString(R.string.order_quantity) + numberOfCoffees;
+        priceMessage += "\n" + getString(R.string.order_total) + NumberFormat.getCurrencyInstance().format(price);
+        priceMessage += "\n" + getString(R.string.order_thank_you);
 
         //Toast.makeText(this, "Order Summary created!", Toast.LENGTH_SHORT).show();
 
