@@ -28,10 +28,7 @@
                 android:inputType="textPersonName" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16sp"
-                android:layout_marginTop="16sp"
+                style="@style/HeaderTextStyle"
                 android:text="@string/activity_toppings" />
 
             <CheckBox
@@ -53,16 +50,12 @@
                 android:text="@string/activity_checkbox_chocolate" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16sp"
-                android:layout_marginTop="16sp"
+                style="@style/HeaderTextStyle"
                 android:text="@string/activity_quantity" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16sp"
                 android:orientation="horizontal">
 
                 <Button
@@ -90,17 +83,14 @@
             </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/activity_order_summary"
-                android:textAllCaps="true" />
+                style="@style/HeaderTextStyle"
+                android:text="@string/activity_order_summary" />
 
             <TextView
                 android:id="@+id/order_summary_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
